@@ -3,7 +3,7 @@ mod cmd;
 mod messages;
 mod prompt;
 
-use std::path::Path;
+use std::{convert::TryInto, path::Path};
 
 use cmd::{build, check, create_new_project, serve};
 use napi_derive::napi;
@@ -50,33 +50,30 @@ pub fn zola_check(
     );
 }
 
-/*
 #[napi]
 pub fn zola_serve(
-    root_dir: &Path,
-    interface: &str,
-    interface_port: u16,
-    output_dir: Option<&Path>,
-    base_url: &str,
-    config_file: &Path,
+    root_dir: String,           //&Path,
+    interface: String,          //&str,
+    interface_port: u32,        //u16,
+    output_dir: Option<String>, //Option<&Path>,
+    base_url: String,           //&str,
+    config_file: String,        // &Path,
     open: bool,
     include_drafts: bool,
     fast_rebuild: bool,
     no_port_append: bool,
-    utc_offset: UtcOffset,
 ) {
     let _ = serve(
-        root_dir,
-        interface,
-        interface_port,
-        output_dir,
-        base_url,
-        config_file,
+        Path::new(&root_dir),
+        &interface,
+        interface_port.try_into().unwrap(),
+        output_dir.as_ref().map(|t| Path::new(t.as_str())),
+        &base_url,
+        Path::new(&config_file),
         open,
         include_drafts,
         fast_rebuild,
         no_port_append,
-        utc_offset,
+        UtcOffset::current_local_offset().unwrap_or(UtcOffset::UTC),
     );
 }
-*/
