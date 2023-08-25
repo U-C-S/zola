@@ -29,3 +29,6 @@ shell.nix
 # vim temporary files
 **/.*.sw*
 .swp
+
+node_modules
+dump
