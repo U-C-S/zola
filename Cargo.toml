@@ -12,6 +12,9 @@ keywords = ["static", "site", "generator", "blog"]
 
 include = ["src/**/*", "LICENSE", "README.md"]
 
+[[bin]]
+name = "zola"
+
 [lib]
 crate-type = ["cdylib"]
 
