@@ -12,12 +12,16 @@ keywords = ["static", "site", "generator", "blog"]
 
 include = ["src/**/*", "LICENSE", "README.md"]
 
+[[bin]]
+name = "zola"
+
+[lib]
+crate-type = ["cdylib"]
+
 [build-dependencies]
 winres = "0.1"
 time = "0.3"
-
-[[bin]]
-name = "zola"
+napi-build = "2.0.1"
 
 [dependencies]
 clap = { version = "4", features = ["derive"] }
@@ -35,6 +39,8 @@ pathdiff = "0.2"
 mime_guess = "2.0"
 # For essence_str() function, see https://github.com/getzola/zola/issues/1845
 mime = "0.3.16"
+napi = { version = "2.13.3", default-features = false, features = ["napi8"] }
+napi-derive = "2.13.0"
 
 
 site = { path = "components/site" }
